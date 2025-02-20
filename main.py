@@ -4,6 +4,8 @@
 import pygame
 from constants import *
 from player import *
+from asteroid import *
+from asteroidfield import *
 
 
 def main():
@@ -11,14 +13,18 @@ def main():
     print(f"Screen width: {SCREEN_WIDTH}")
     print(f"Screen height: {SCREEN_HEIGHT}")
     pygame.init()
+    updatable = pygame.sprite.Group()
+    AsteroidField.containers = (updatable,)
+    asteroid_field = AsteroidField()
     uhu = pygame.time.Clock()
     dt = 0
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     x = SCREEN_WIDTH/2
-    y = SCREEN_HEIGHT/2
-    updateable = pygame.sprite.Group()
-    drawable = pygame.sprite.Group()
-    Player.containers = (updateable, drawable)
+    y = SCREEN_HEIGHT/2    
+    drawable = pygame.sprite.Group()    
+    asteroids = pygame.sprite.Group
+    Player.containers = (updatable, drawable)
+    Asteroid.containers = (asteroids, updatable, drawable)
     player_ship = Player(x, y)
     while True:
         for event in pygame.event.get():
@@ -27,7 +33,7 @@ def main():
         screen.fill((1, 1, 1))
         for to_draw in drawable:
             to_draw.draw(screen)
-        updateable.update(dt)
+        updatable.update(dt)
         pygame.display.flip()        
         dt = uhu.tick(60)/1000
 
