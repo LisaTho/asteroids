@@ -16,14 +16,18 @@ def main():
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     x = SCREEN_WIDTH/2
     y = SCREEN_HEIGHT/2
+    updateable = pygame.sprite.Group()
+    drawable = pygame.sprite.Group()
+    Player.containers = (updateable, drawable)
     player_ship = Player(x, y)
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return
         screen.fill((1, 1, 1))
-        player_ship.draw(screen)
-        player_ship.update(dt)
+        for to_draw in drawable:
+            to_draw.draw(screen)
+        updateable.update(dt)
         pygame.display.flip()        
         dt = uhu.tick(60)/1000
 
