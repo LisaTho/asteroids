@@ -23,6 +23,7 @@ def main():
                 return
         screen.fill((1, 1, 1))
         player_ship.draw(screen)
+        player_ship.update(dt)
         pygame.display.flip()        
         dt = uhu.tick(60)/1000
 
