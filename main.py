@@ -6,6 +6,7 @@ from constants import *
 from player import *
 from asteroid import *
 from asteroidfield import *
+import sys
 
 
 def main():
@@ -26,6 +27,8 @@ def main():
     Player.containers = (updatable, drawable)
     Asteroid.containers = (asteroids, updatable, drawable)
     player_ship = Player(x, y)
+    asteroid_field = AsteroidField()
+    asteroid_field.spawn(50, pygame.Vector2(100, 100), pygame.Vector2(0, 0))
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -36,8 +39,10 @@ def main():
         updatable.update(dt)
         pygame.display.flip()        
         dt = uhu.tick(60)/1000
-
-
+        for asteroid_ in asteroids:
+            if asteroid_.is_colliding(player_ship):
+                sys.exit("Game over!")
+            
 
 if __name__ == "__main__":
     main()
