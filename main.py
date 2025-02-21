@@ -30,8 +30,6 @@ def main():
     Asteroid.containers = (asteroids, updatable, drawable)
     Shot.containers = (shots, updatable, drawable)
     player_ship = Player(x, y)
-    asteroid_field = AsteroidField()
-    asteroid_field.spawn(50, pygame.Vector2(100, 100), pygame.Vector2(0, 0))
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
